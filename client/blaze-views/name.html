@@ -1,0 +1,36 @@
+<template name="nameView">
+  <h3>Name</h3>
+  {{#with formMode}}
+    <!-- at some point try other validation options validation="blur" -->
+    {{#autoForm
+      collection=collection
+      id=id
+      schema=schema
+      meteormethod=method
+      doc=doc
+      type=type class="form-horizontal" }}
+      
+      {{> inputControl
+        name="firstName"
+        title="First Name"
+        placeholder="John"}}
+
+      {{#with checkboxState 'middleNameDNA'}}
+        {{> inputControlCheckbox
+          name="middleName"
+          checkbox="middleNameDNA"
+          title="Middle Name"
+          checkbox_classes="checkbox-click-event display-na"
+          placeholder="Alexander"
+          input_value=value}}
+      {{/with}}
+
+      {{> inputControl
+        name="lastName"
+        title="Last Name"
+        placeholder="Doe Jr."}}
+
+      <button type="submit" class="btn btn-primary pull-right">Save</button>
+    {{/autoForm}}
+  {{/with}}
+</template>

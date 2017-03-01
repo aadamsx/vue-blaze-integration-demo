@@ -1,0 +1,18 @@
+<template name="inputControl">
+  <div class="row">
+    <div class="col-xs-7 col-md-10 col-xs-special">
+      <div class="form-group {{#if afFieldIsInvalid name=name}}has-error{{/if}}">
+        <label class="col-md-4 control-label label-special" >{{title}}</label>
+        <div class="col-md-5 col-md-special">
+            {{> afFieldInput name=name placeholder=placeholder class=classes}}
+
+            {{#if afFieldIsInvalid name=name}}
+              <span class="help-block help-block-validation-condition">{{afFieldMessage name=name}}</span>
+            {{else}}
+              <span class="help-block help-block-under-input">{{subTitle}}</span>
+            {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
