@@ -28,7 +28,6 @@ Template.nameView.helpers({
     if (doc) {
       return {
         doc: doc,
-        collection: "Names",
         id: "NamesForm",
         schema: "NamesSchema",
         type: "method-update"
@@ -36,7 +35,6 @@ Template.nameView.helpers({
     } else {
       return {
         doc: null,
-        collection: "Names",
         id: "NamesForm",
         schema: "NamesSchema",
         type: "method"
