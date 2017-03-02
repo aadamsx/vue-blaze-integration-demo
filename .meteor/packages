@@ -28,3 +28,5 @@ arillo:flow-router-helpers
 aldeed:autoform@=5.4.0
 aldeed:simple-schema@=1.3.0
 aldeed:collection2@=2.3.2
+check
+ejson

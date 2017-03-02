@@ -11,13 +11,9 @@ Template.nameView.onCreated(function() {
 
     if (subscription.ready()) {
       const doc = Names.findOne({ userId: "123" });
-      debugger;
       if (doc) {
         // checkboxes
-        this.state.set("middleNameDNA", {
-          checked: doc.middleNameDNA,
-          value: doc.middleName
-        });
+        this.state.set("middleNameDNA", doc.middleName);
       } else {
         // checkboxes
         this.state.set("middleNameDNA", null);
@@ -28,15 +24,14 @@ Template.nameView.onCreated(function() {
 
 Template.nameView.helpers({
   formMode() {
-    var doc = Names.findOne({ userId: "123" });
+    let doc = Names.findOne({ userId: "123" });
     if (doc) {
       return {
         doc: doc,
         collection: "Names",
         id: "NamesForm",
         schema: "NamesSchema",
-        type: "method-update",
-        method: "updateTheName"
+        type: "method-update"
       };
     } else {
       return {
@@ -44,29 +39,55 @@ Template.nameView.helpers({
         collection: "Names",
         id: "NamesForm",
         schema: "NamesSchema",
-        type: "method",
-        method: "insertTheName"
+        type: "method"
       };
     }
   },
   checkboxState(field) {
     let ckbx = Template.instance().state.get(field);
-    debugger;
     if (ckbx)
-      return { value: ckbx.value };
+      return { value: ckbx };
     else
       return { value: "" };
   }
 });
 
 Template.nameView.events({
-  // "click .btn-primary": (event, template) => {}
   "click .checkbox-click-event": (event, template) => {
-    // event.preventDefault();
     var handle = event.target;
     let value = handle.checked ? "N/A" : "";
     let name = handle.name;
 
     template.state.set(name, value);
+  },
+  "click button[type=submit]": (event, template) => {
+    event.preventDefault();
+
+    let doc = {};
+
+    doc.firstName = template.find("input[name=firstName]").value;
+    doc.middleName = template.find("input[name=middleName]").value;
+    doc.middleNameDNA = template.find("input[name=middleNameDNA]").checked;
+    doc.lastName = template.find("input[name=lastName]").value;
+
+    let record = Names.findOne({ userId: "123" });
+
+    if (record) {
+      // update
+      Meteor.call("updateTheName2", doc, error => {
+        if (error) {
+          console.log("error", error);
+        }
+      });
+    } else {
+      // insert
+      Meteor.call("insertTheName2", doc, (error, _id) => {
+        if (error) {
+          console.log("error", error);
+        }
+
+        if (_id) {}
+      });
+    }
   }
 });

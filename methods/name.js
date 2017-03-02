@@ -1,63 +1,28 @@
-if (Meteor.isClient) {
-  AutoForm.hooks({
-    NamesForm: {
-      onSuccess: function(operation, result, template) {
-        debugger;
-        console.log(result);
-      },
-      onError: function(formType, error) {
-        debugger;
-        console.log(error);
-      },
-      onSubmit: function(doc) {
-        debugger;
-        Schemas.Names.clean(doc);
-        this.done();
-        return false;
-      },
-      before: {
-        insert: function(doc) {
-          debugger;
-          return this.result(doc);
-        },
-        update: function(doc) {
-          debugger;
-          return this.result(doc);
-        }
-      },
-      after: {
-        insert: function(error, result) {
-          debugger;
-          if (error) {
-            console.log("Insert Error:", error);
-          }
-        },
-        update: function(error, result) {
-          debugger;
-          if (error) {
-            console.log("Update Error:", error);
-          } else {
-            console.log("Updated!", result);
-          }
-        }
-      }
-    }
-  });
-}
-
 Meteor.methods({
-  updateTheName: function(modifier, objID) {
-    debugger;
-    Names.update(objID, modifier);
+  updateTheName2: function(doc) {
+    // this.userId / Meteor.userId()
+    let record = Names.findOne({ userId: "123" });
+    doc.userId = record.userId;
+    doc.defaultsSet = record.defaultsSet;
+    doc.createdAt = record.createdAt;
+    doc.updatedAt = new Date();
+    // doc._id = record._id;
+    NamesSchema.namedContext("myContext").validate(doc);
+    var context = NamesSchema.namedContext("myContext");
+    if (!context.isValid()) {
+      console.log(context.invalidKeys());
+    }
+
+    Names.update({ _id: record._id }, { $set: doc });
   },
-  insertTheName: function(doc) {
-    debugger;
-    // Schemas.Names.clean(doc);
-    // check(doc, Schemas.Names.simpleSchema());
-    // doc._id = "";
-    // doc.defaultsSet = true;
-    // doc.createdAt = new Date();
-    // doc.updatedAt = "";
-    Names.insert(doc);
+  insertTheName2: function(doc) {
+    // this.userId / Meteor.userId()
+    doc.userId = "123";
+    doc.defaultsSet = true;
+    doc.createdAt = new Date();
+    doc.updatedAt = null;
+
+    let _id = Names.insert(doc);
+    return _id;
   }
 });
