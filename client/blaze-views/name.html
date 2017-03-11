@@ -28,6 +28,15 @@
         title="Last Name"
         placeholder="Doe Jr."}}
 
+      {{> inputControlRadio classes="radio-click-event" name="priorNameUsed" title="Have you used a Prior Name?"}}
+
+      {{#if radioState 'priorNameUsed'}}
+        {{> inputControl
+          name="nameUsed"
+          title="Prior Name Used"
+          placeholder="Jason Adam"}}
+      {{/if}}
+
       <button type="submit" class="btn btn-primary pull-right">Save</button>
     {{/autoForm}}
   {{/with}}

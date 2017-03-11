@@ -14,9 +14,11 @@ Template.nameView.onCreated(function() {
       if (doc) {
         // checkboxes
         this.state.set("middleNameDNA", doc.middleName);
+        this.state.set("priorNameUsed", doc.priorNameUsed);
       } else {
         // checkboxes
         this.state.set("middleNameDNA", null);
+        this.state.set("priorNameUsed", null);
       }
     }
   });
@@ -47,7 +49,15 @@ Template.nameView.helpers({
       return { value: ckbx };
     else
       return { value: "" };
-  }
+  },
+  radioState(field) {
+    debugger;
+    var rdo = Template.instance().state.get(field);
+
+    if (rdo && rdo === "No") return false;
+    else if (rdo && rdo === "Yes") return true;
+    else return false;
+  },
 });
 
 Template.nameView.events({
@@ -87,5 +97,13 @@ Template.nameView.events({
         if (_id) {}
       });
     }
+  },
+  'click .radio-click-event': (event, template) => {
+    var handle = event.target;
+    var mode = template.state.get('mode');
+    var value = handle.value;
+    var name = handle.name;
+
+    template.state.set(name, value);
   }
 });
