@@ -77,6 +77,7 @@ Template.nameView.events({
     doc.middleName = template.find("input[name=middleName]").value;
     doc.middleNameDNA = template.find("input[name=middleNameDNA]").checked;
     doc.lastName = template.find("input[name=lastName]").value;
+    doc.priorNameUsed = template.find("input[name=priorNameUsed]").value;
 
     let record = Names.findOne({ userId: "123" });
 
