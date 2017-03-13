@@ -1,13 +1,22 @@
 import { Template } from "meteor/templating";
 import { ReactiveDict } from "meteor/reactive-dict";
+import { createClass } from "asteroid";
 
 import "./namesOverview.html";
+
+const Asteroid = createClass();
+// Connect to a Meteor backend
+const asteroid = new Asteroid({
+  endpoint: 'ws://localhost:5000/websocket',
+});
+
+asteroid.subscribe("NamesOverview");
 
 Template.namesOverview.onCreated(function() {
   this.state = new ReactiveDict();
 
   this.autorun(() => {
-    this.subscribe("NamesOverview");
+    // this.subscribe("NamesOverview");
   });
 });
 

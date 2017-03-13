@@ -1,6 +1,6 @@
 import { Template } from "meteor/templating";
 import { ReactiveDict } from "meteor/reactive-dict";
-import {createClass} from "asteroid";
+import { createClass } from "asteroid";
 
 import "./name.html";
 
