@@ -1,15 +1,15 @@
 Names = new Mongo.Collection("names");
 
-Names.allow({
-  insert: function(userId, doc) {
-    // only allow posting if you are logged in
-    return !! userId;
-  },
-  update: function(userId, doc) {
-    // only allow updating if you are logged in
-    return !! userId;
-  }
-});
+// Names.allow({
+//   insert: function(userId, doc) {
+//     // only allow posting if you are logged in
+//     return !! userId;
+//   },
+//   update: function(userId, doc) {
+//     // only allow updating if you are logged in
+//     return !! userId;
+//   }
+// });
 
 NamesSchema = new SimpleSchema({
   userId: { type: String, optional: true },
