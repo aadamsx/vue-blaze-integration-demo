@@ -1,3 +1,3 @@
 Meteor.publish("Names", function(userId) {
-  return Names.find({ userId: userId });
+  return Names.findOne({ userId: userId });
 });

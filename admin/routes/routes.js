@@ -5,9 +5,16 @@ FlowRouter.route("/", {
   name: "home.view"
 });
 
-FlowRouter.route("/name", {
+FlowRouter.route("/names-overview", {
   action() {
-    BlazeLayout.render("mainLayout", { aside: "sidebar", main: "nameView" });
+    BlazeLayout.render("mainLayout", { aside: "sidebar", main: "namesOverview" });
   },
-  name: "name.view"
+  name: "names.overview.view"
+});
+
+FlowRouter.route("/name-detail", {
+  action() {
+    BlazeLayout.render("mainLayout", { aside: "sidebar", main: "nameDetail" });
+  },
+  name: "name.detail.view"
 });
