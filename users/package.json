@@ -5,6 +5,7 @@
     "start": "MONGO_URL=mongodb://demo:demo@ds011459.mlab.com:11459/demos meteor --port 3000 run"
   },
   "dependencies": {
+    "asteroid": "^2.0.3",
     "babel-runtime": "^6.23.0",
     "meteor-node-stubs": "~0.2.4"
   }
