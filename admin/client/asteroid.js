@@ -6,7 +6,7 @@ const asteroid = new Asteroid({
   endpoint: 'ws://localhost:5000/websocket',
 })
 
-asteroid.subscribe("NamesOverview");
+// asteroid.subscribe("NamesOverview");
 
 asteroid.ddp.on('added', (doc) => {
   // we need proper document object format here

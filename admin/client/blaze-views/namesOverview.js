@@ -7,7 +7,7 @@ Template.namesOverview.onCreated(function() {
   this.state = new ReactiveDict();
 
   this.autorun(() => {
-    // this.subscribe("NamesOverview");
+    this.subscribe("NamesOverview");
   });
 });
 

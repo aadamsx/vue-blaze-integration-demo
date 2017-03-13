@@ -1,27 +1,17 @@
 import { Template } from "meteor/templating";
 import { ReactiveDict } from "meteor/reactive-dict";
-import { createClass } from "asteroid";
 
 import "./name.html";
-
-const Asteroid = createClass();
-// Connect to a Meteor backend
-const asteroid = new Asteroid({
-  endpoint: 'ws://localhost:5000/websocket',
-});
-
-// Use real-time collections
 
 Template.nameView.onCreated(function() {
   this.state = new ReactiveDict();
 
   asteroid.subscribe("Names", Meteor.userId());
 
-
   this.autorun(() => {
-    // let subscription = this.subscribe("Names", Meteor.userId());
+    let subscription = this.subscribe("Names", Meteor.userId());
 
-    // if (subscription.ready()) {
+    if (subscription.ready()) {
       const doc = Names.findOne({ userId: Meteor.userId() });
       if (doc) {
         // checkboxes
@@ -32,7 +22,7 @@ Template.nameView.onCreated(function() {
         this.state.set("middleNameDNA", null);
         this.state.set("priorNameUsed", null);
       }
-    // }
+    }
   });
 });
 
@@ -96,40 +86,40 @@ Template.nameView.events({
     if (record) {
       // Call method and use promises
       // update
-      asteroid.call("updateTheName2", doc)
-        .then(result => {
-            console.log("Success");
-            console.log(result);
-        })
-        .catch(error => {
-            console.log("Error");
-            console.error(error);
-        });
+      // asteroid.call("updateTheName2", doc)
+      //   .then(result => {
+      //       console.log("Success");
+      //       console.log(result);
+      //   })
+      //   .catch(error => {
+      //       console.log("Error");
+      //       console.error(error);
+      //   });
 
-      // // update
-      // Meteor.call("updateTheName2", doc, error => {
-      //   if (error) {
-      //     console.log("error", error);
-      //   }
-      // });
+      // update
+      Meteor.call("updateTheName2", doc, error => {
+        if (error) {
+          console.log("error", error);
+        }
+      });
     } else {
       // insert
-      asteroid.call("insertTheName2", doc)
-        .then(result => {
-            console.log("Success");
-            console.log(result);
-        })
-        .catch(error => {
-            console.log("Error");
-            console.error(error);
-        });
-      // Meteor.call("insertTheName2", doc, (error, _id) => {
-      //   if (error) {
-      //     console.log("error", error);
-      //   }
-      //
-      //   if (_id) {}
-      // });
+      // asteroid.call("insertTheName2", doc)
+      //   .then(result => {
+      //       console.log("Success");
+      //       console.log(result);
+      //   })
+      //   .catch(error => {
+      //       console.log("Error");
+      //       console.error(error);
+      //   });
+      Meteor.call("insertTheName2", doc, (error, _id) => {
+        if (error) {
+          console.log("error", error);
+        }
+
+        if (_id) {}
+      });
     }
   },
   'click .radio-click-event': (event, template) => {
