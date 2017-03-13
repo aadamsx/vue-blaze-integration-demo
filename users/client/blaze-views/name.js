@@ -11,10 +11,12 @@ const asteroid = new Asteroid({
 });
 
 // Use real-time collections
-asteroid.subscribe("Names", Meteor.userId());
 
 Template.nameView.onCreated(function() {
   this.state = new ReactiveDict();
+
+  asteroid.subscribe("Names", Meteor.userId());
+
 
   this.autorun(() => {
     // let subscription = this.subscribe("Names", Meteor.userId());

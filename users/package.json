@@ -2,7 +2,8 @@
   "name": "vue-blaze-integration-demo",
   "private": true,
   "scripts": {
-    "start": "MONGO_URL=mongodb://demo:demo@ds011459.mlab.com:11459/demos meteor --port 3000 run"
+    "start": "MONGO_URL=mongodb://demo:demo@ds011459.mlab.com:11459/demos meteor --port 3000 run",
+    "build": "NODE_ENV=production VULCANIZE=true meteor build ../myapp-dist --server=https://api.myapp.com/ --mobile-settings settings-production.json"
   },
   "dependencies": {
     "asteroid": "^2.0.3",

@@ -7,6 +7,7 @@
     "meteor-node-stubs": "~0.2.4"
   },
   "scripts": {
-    "start": "MONGO_URL=mongodb://demo:demo@ds011459.mlab.com:11459/demos meteor --port 4000 run"
+    "start": "MONGO_URL=mongodb://demo:demo@ds011459.mlab.com:11459/demos meteor --port 4000 run",
+    "build": "NODE_ENV=production VULCANIZE=true meteor build ../myapp-dist --server=https://api.myapp.com/ --mobile-settings settings-production.json"
   }
 }
