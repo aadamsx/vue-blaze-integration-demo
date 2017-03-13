@@ -1,7 +1,7 @@
 Meteor.methods({
   updateTheName2: function(doc) {
     // this.userId / Meteor.userId()
-    let record = Names.findOne({ userId: "123" });
+    let record = Names.findOne({ userId: this.userId() });
     doc.userId = record.userId;
     doc.defaultsSet = record.defaultsSet;
     doc.createdAt = record.createdAt;
@@ -17,7 +17,7 @@ Meteor.methods({
   },
   insertTheName2: function(doc) {
     // this.userId / Meteor.userId()
-    doc.userId = "123";
+    doc.userId = this.userId();
     doc.defaultsSet = true;
     doc.createdAt = new Date();
     doc.updatedAt = null;

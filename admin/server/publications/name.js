@@ -3,5 +3,5 @@ Meteor.publish("NamesOverview", function() {
 });
 
 Meteor.publish("Names", function(userId) {
-  return Names.findOne({ userId: userId });
+  return Names.find({ userId: userId, limit: 1 });
 });

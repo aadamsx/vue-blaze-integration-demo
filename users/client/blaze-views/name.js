@@ -7,10 +7,10 @@ Template.nameView.onCreated(function() {
   this.state = new ReactiveDict();
 
   this.autorun(() => {
-    let subscription = this.subscribe("Names", "123");
+    let subscription = this.subscribe("Names", Meteor.userId());
 
     if (subscription.ready()) {
-      const doc = Names.findOne({ userId: "123" });
+      const doc = Names.findOne({ userId: Meteor.userId() });
       if (doc) {
         // checkboxes
         this.state.set("middleNameDNA", doc.middleName);
@@ -26,7 +26,7 @@ Template.nameView.onCreated(function() {
 
 Template.nameView.helpers({
   formMode() {
-    let doc = Names.findOne({ userId: "123" });
+    let doc = Names.findOne({ userId: Meteor.userId() });
     if (doc) {
       return {
         doc: doc,
@@ -79,7 +79,7 @@ Template.nameView.events({
     doc.lastName = template.find("input[name=lastName]").value;
     doc.priorNameUsed = template.find("input[name=priorNameUsed]").value;
 
-    let record = Names.findOne({ userId: "123" });
+    let record = Names.findOne({ userId: Meteor.userId() });
 
     if (record) {
       // update
