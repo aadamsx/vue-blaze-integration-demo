@@ -1,12 +1,13 @@
 <template name="nameView">
   <h3>Name Form</h3>
-  {{#with formMode}}
+  <!-- {{#with formMode}} -->
     <!-- at some point try other validation options validation="blur" -->
     {{#autoForm
-      id=id
-      schema=schema
+      id="NamesForm"
+      collection=names
       doc=doc
-      type=type class="form-horizontal" }}
+      type=type
+      class="form-horizontal" }}
 
       {{> inputControl
         name="firstName"
@@ -39,5 +40,5 @@
 
       <button type="submit" class="btn btn-primary pull-right">Save</button>
     {{/autoForm}}
-  {{/with}}
+  <!-- {{/with}} -->
 </template>

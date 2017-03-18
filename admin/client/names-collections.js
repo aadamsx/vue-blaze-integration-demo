@@ -1,25 +1,26 @@
 "use strict";
 
-import server from "./common-server-connection.js";
+import Server from "./common-server-connection.js";
+import { Mongo } from 'meteor/mongo';
 
-let Names = new Meteor.Collection('names', server);
+let Names = new Mongo.Collection('names', Server);
 
 let subNamesOverview = () => {
-  server.subscribe('NamesOverview');
+  Server.subscribe('NamesOverview');
 }
 
 let unsubNamesOverview = () => {
-  let handle = server.subscribe('NamesOverview');
+  let handle = Server.subscribe('NamesOverview');
   debugger;
   if (handle) handle.stop();
 }
 
 let subNames = (userId) => {
-  server.subscribe('Names', userId);
+  Server.subscribe('Names', userId);
 }
 
 let unsubNames = () => {
-  let handle = server.subscribe('Names');
+  let handle = Server.subscribe('Names');
   if (handle) handle.stop();
 }
 

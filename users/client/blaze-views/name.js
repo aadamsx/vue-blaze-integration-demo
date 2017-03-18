@@ -1,15 +1,24 @@
+"use strict";
+
 import { Template } from "meteor/templating";
 import { ReactiveDict } from "meteor/reactive-dict";
+import { Mongo } from 'meteor/mongo';
 
 import "./name.html";
+
+import { Names, subNames, unsubNames } from "../names-collections.js";
 
 Template.nameView.onCreated(function() {
   this.state = new ReactiveDict();
 
   this.autorun(() => {
-    let subscription = this.subscribe("Names", Meteor.userId());
+    debugger;
+    let subscription = subNames(Meteor.userId());
+    const doc = Names.findOne({ userId: Meteor.userId() });
+    debugger;
+    // let subscription = this.subscribe("Names", Meteor.userId());
 
-    if (subscription.ready()) {
+    if (subscription && subscription.ready()) {
       const doc = Names.findOne({ userId: Meteor.userId() });
       if (doc) {
         // checkboxes
@@ -25,23 +34,35 @@ Template.nameView.onCreated(function() {
 });
 
 Template.nameView.helpers({
-  formMode() {
+  // formMode() {
+  //   let doc = Names.findOne({ userId: Meteor.userId() });
+  //   if (doc) {
+  //     return {
+  //       doc: doc,
+  //       id: "NamesForm",
+  //       schema: "NamesSchema",
+  //       type: "method-update"
+  //     };
+  //   } else {
+  //     return {
+  //       doc: null,
+  //       id: "NamesForm",
+  //       schema: "NamesSchema",
+  //       type: "method"
+  //     };
+  //   }
+  // },
+  names() {
+    return Names;
+  },
+  doc() {
     let doc = Names.findOne({ userId: Meteor.userId() });
-    if (doc) {
-      return {
-        doc: doc,
-        id: "NamesForm",
-        schema: "NamesSchema",
-        type: "method-update"
-      };
-    } else {
-      return {
-        doc: null,
-        id: "NamesForm",
-        schema: "NamesSchema",
-        type: "method"
-      };
-    }
+    return doc;
+  },
+  type() {
+    let doc = Names.findOne({ userId: Meteor.userId() });
+    if (doc) return "method-update";
+    else return "method";
   },
   checkboxState(field) {
     let ckbx = Template.instance().state.get(field);

@@ -32,3 +32,4 @@ check
 ejson
 accounts-ui
 accounts-password
+session

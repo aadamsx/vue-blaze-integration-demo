@@ -6,8 +6,8 @@
     "build": "NODE_ENV=production VULCANIZE=true meteor build ../myapp-dist --server=https://api.myapp.com/ --mobile-settings settings-production.json"
   },
   "dependencies": {
-    "asteroid": "^2.0.3",
     "babel-runtime": "^6.23.0",
     "meteor-node-stubs": "~0.2.4"
-  }
+  },
+  "devDependencies": {}
 }
