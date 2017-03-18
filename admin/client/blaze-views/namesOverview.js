@@ -37,7 +37,7 @@ Template.namesOverview.events({
     debugger;
 
     var handle = event.target;
-    var nameId = event.id;
+    var nameId = handle.id;
 
     if (nameId) {
       Session.set('nameId', nameId);
