@@ -32,3 +32,9 @@ NamesSchema = new SimpleSchema({
 });
 
 Names.attachSchema(NamesSchema);
+
+Names.deny({
+  insert() {return true;},
+  update() {return true;},
+  remove() {return true;}
+});

@@ -6,8 +6,6 @@ import "./name.html";
 Template.nameView.onCreated(function() {
   this.state = new ReactiveDict();
 
-  asteroid.subscribe("Names", Meteor.userId());
-
   this.autorun(() => {
     let subscription = this.subscribe("Names", Meteor.userId());
 

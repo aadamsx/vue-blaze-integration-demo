@@ -1,0 +1,15 @@
+<template name="anotherLayout">
+  <div class="body container">
+    <div class="navigation leftside item">
+      {{> Template.dynamic template=leftSide}}
+    </div>
+
+    <div class="main item">
+      {{> Template.dynamic template=main}}
+    </div>
+
+    <div class="navigation leftside item">
+  	   {{> Template.dynamic template=rightSide}}
+    </div>
+  </div>
+</template>

@@ -1,6 +1,8 @@
 Meteor.methods({
   updateTheName2: function(doc) {
-    // this.userId / Meteor.userId()
+    if (! this.userId) {
+      throw new Meteor.Error('update-name.unauthorized');
+    }
     let record = Names.findOne({ userId: this.userId });
     doc.userId = record.userId;
     doc.defaultsSet = record.defaultsSet;
@@ -16,7 +18,9 @@ Meteor.methods({
     Names.update({ _id: record._id }, { $set: doc });
   },
   insertTheName2: function(doc) {
-    // this.userId / Meteor.userId()
+    if (! this.userId) {
+      throw new Meteor.Error('insert-name.unauthorized');
+    }
     doc.userId = this.userId;
     doc.defaultsSet = true;
     doc.createdAt = new Date();
