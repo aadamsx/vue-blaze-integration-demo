@@ -34,24 +34,6 @@ Template.nameView.onCreated(function() {
 });
 
 Template.nameView.helpers({
-  // formMode() {
-  //   let doc = Names.findOne({ userId: Meteor.userId() });
-  //   if (doc) {
-  //     return {
-  //       doc: doc,
-  //       id: "NamesForm",
-  //       schema: "NamesSchema",
-  //       type: "method-update"
-  //     };
-  //   } else {
-  //     return {
-  //       doc: null,
-  //       id: "NamesForm",
-  //       schema: "NamesSchema",
-  //       type: "method"
-  //     };
-  //   }
-  // },
   names() {
     return Names;
   },
@@ -132,6 +114,7 @@ Template.nameView.events({
       //       console.log("Error");
       //       console.error(error);
       //   });
+      debugger;
       Meteor.call("insertTheName2", doc, (error, _id) => {
         if (error) {
           console.log("error", error);
